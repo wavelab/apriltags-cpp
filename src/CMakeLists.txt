@@ -11,29 +11,18 @@ add_library(apriltags
   UnionFindSimple.cpp
 )
 
-set(AT_LIBS apriltags ${OPENCV_LDFLAGS})
+set(AT_LIBS apriltags flycapture ${OPENCV_LDFLAGS})
 
 target_link_libraries(apriltags ${AT_LIBS})
 
 add_executable(camtest camtest.cpp)
 target_link_libraries(camtest ${AT_LIBS})
 
+add_executable(sandbox sandbox.cpp)
+target_link_libraries(sandbox ${AT_LIBS})
+
 add_executable(tagtest tagtest.cpp)
 target_link_libraries(tagtest ${AT_LIBS})
 
 add_executable(quadtest quadtest.cpp)
 target_link_libraries(quadtest ${AT_LIBS})
-
-if (GLUT_LIBRARY)
-
-  add_executable(gltest gltest.cpp)
-  target_link_libraries(gltest ${GLUT_LIBRARY} ${OPENGL_LIBRARY} ${AT_LIBS})
-
-endif()
-
-if (CAIRO_FOUND)
-
-  add_executable(maketags maketags.cpp)
-  target_link_libraries(maketags ${CAIRO_LIBRARIES} ${AT_LIBS} ${CAIRO_LIBS})
-
-endif() 
